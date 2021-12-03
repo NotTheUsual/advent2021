@@ -39,3 +39,48 @@ export function solvePart1 (input: string): number {
 
   return decimalGamma * decimalEpsilon;
 }
+
+const calculateCounts = (numbers: string[], index: number): ValueCount => {
+  const counts: ValueCount = { zeroes: 0, ones: 0 };
+  numbers.forEach(number => {
+    if (number[index] === '0') counts.zeroes += 1;
+    if (number[index] === '1') counts.ones += 1;
+  });
+  return counts;
+};
+
+const findO2GeneratorRating = (numbers: string[]): string => {
+  let filteredNumbers = [...numbers];
+
+  for (let index = 0; index < numbers[0].length; index += 1) {
+    const counts = calculateCounts(filteredNumbers, index);
+    const commonValue = (counts.zeroes > counts.ones) ? '0' : '1';
+    filteredNumbers = filteredNumbers.filter(number => number[index] === commonValue);
+    if (filteredNumbers.length === 1) return filteredNumbers[0];
+  }
+
+  console.log(`ODD: there are ${filteredNumbers.length} filtered o2 numbers`);
+  return filteredNumbers[0];
+}
+
+const findCO2ScrubberRating = (numbers: string[]): string => {
+  let filteredNumbers = [...numbers];
+
+  for (let index = 0; index < numbers[0].length; index += 1) {
+    const counts = calculateCounts(filteredNumbers, index);
+    const uncommonValue = (counts.zeroes <= counts.ones) ? '0' : '1';
+    filteredNumbers = filteredNumbers.filter(number => number[index] === uncommonValue);
+    if (filteredNumbers.length === 1) return filteredNumbers[0];
+  }
+
+  console.log(`ODD: there are ${filteredNumbers.length} filtered co2 numbers`);
+  return filteredNumbers[0];
+}
+
+export function solvePart2 (input: string): number {
+  const numbers = input.split('\n');
+  const o2BinaryRating = findO2GeneratorRating(numbers);
+  const co2BinaryRating = findCO2ScrubberRating(numbers);
+
+  return parseInt(o2BinaryRating, 2) * parseInt(co2BinaryRating, 2);
+}
