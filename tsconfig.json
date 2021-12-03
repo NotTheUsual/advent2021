@@ -11,8 +11,9 @@
     "strictNullChecks": true,
     "strict": true,
     "sourceMap": false,
-    "outDir": "dist"
+    "outDir": "dist",
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
-  "include": ["example/**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "src/scripts/**/*"]
+  "include": ["days/**/*.ts","example/**/*.ts"],
+  "exclude": ["node_modules", "types", "**/*.spec.ts", "**/*.input.ts", "src/scripts/**/*"]
 }
