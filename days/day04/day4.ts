@@ -67,3 +67,28 @@ export function solvePart1 (input: string): number {
 
   return 0;
 }
+
+export function solvePart2 (input: string): number {
+  const [drawnNumberStrings, ...boardBlueprints] = input.split('\n\n');
+  const drawnNumbers = parseDrawnNumbers(drawnNumberStrings);
+  const boards = parseBoards(boardBlueprints);
+  const winners = new Set<number>();
+  
+  for (let number of drawnNumbers) {
+    for (let index = 0; index < boards.length; index += 1) {
+      if (winners.has(index)) continue;
+      const board = boards[index];
+      if (number in board) {
+        board[number].called = true
+        if (hasWon(board)) {
+          winners.add(index);
+          if (winners.size === boards.length) {
+            return calculateScoreFor(board, number);
+          }
+        }
+      }
+    }
+  }
+
+  return 0;
+}

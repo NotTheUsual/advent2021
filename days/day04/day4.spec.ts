@@ -1,6 +1,5 @@
 import theredoc from 'theredoc';
-import { solvePart1 } from './day4';
-import { solvePart2 } from './day4b';
+import { solvePart1, solvePart2 } from './day4';
 import day4Input from './day4.input';
 
 describe('Day 4', () => {
