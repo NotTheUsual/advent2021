@@ -46,7 +46,7 @@ describe('Day 5', () => {
 
     test('real puzzle', () => {
       const result = solvePart2(day5Input);
-      expect(result).toBe(6225);
+      expect(result).toBe(22116);
     });
   });
 

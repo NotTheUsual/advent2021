@@ -1,3 +1,5 @@
+import { safeIncrement } from '../_utils';
+
 class Point {
   x: number;
   y: number;
@@ -56,8 +58,7 @@ export function solvePart1 (input: string): number {
     if (line[0].x !== line[1].x && line[0].y !== line[1].y) return;
     const pointsToProcess = calculatePointsInLine(line);
     pointsToProcess.forEach(point => {
-      points[point] ||= 0;
-      points[point] += 1;
+      safeIncrement(points, point);
     })
   });
   return Object.values(points).filter(count => count > 1).length;

@@ -1,3 +1,5 @@
+import { safeIncrement } from '../_utils';
+
 interface Cell {
   called: boolean;
   row: number;
@@ -26,10 +28,6 @@ const parseBoards = (boardBlueprints: string[]): Board[] => {
 };
 
 type Accumulator = Record<string, number>;
-const safeIncrement = (accumulator: Accumulator, key: string) => {
-  accumulator[key] ||= 0;
-  accumulator[key] += 1;
-}
 
 const hasWon = (board: Board): boolean => {
   const accumulator: Accumulator = {};
