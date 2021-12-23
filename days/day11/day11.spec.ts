@@ -1,5 +1,6 @@
 import theredoc from 'theredoc';
 import { solvePart1 } from './day11';
+import { solvePart2 } from './day11b';
 import day11Input from './day11.input';
 
 describe('Day 11', () => {
@@ -92,6 +93,28 @@ describe('Day 11', () => {
     test('real puzzle', () => {
       const result = solvePart1(day11Input);
       expect(result).toBe(1652);
+    });
+  });
+
+  describe('part 2', () => {
+    test('test case', () => {
+      const input = theredoc`
+        5483143223
+        2745854711
+        5264556173
+        6141336146
+        6357385478
+        4167524645
+        2176841721
+        6882881134
+        4846848554
+        5283751526`;
+      expect(solvePart2(input)).toBe(195);
+    });
+
+    test('real puzzle', () => {
+      const result = solvePart2(day11Input);
+      expect(result).toBe(220);
     });
   });
 });
