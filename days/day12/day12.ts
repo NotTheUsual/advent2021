@@ -49,3 +49,54 @@ export function solvePart1 (input: string): number {
   const allRoutes = findRoutes(caveSystem, 'start', ['start']);
   return allRoutes.filter(route => route === 'end').length;
 }
+
+class History {
+  entries: string[];
+  hasRevisitedSmallCave: boolean;
+
+  constructor (entries: string[], hasRevisitedSmallCave: boolean) {
+    this.entries = entries;
+    this.hasRevisitedSmallCave = hasRevisitedSmallCave;
+  }
+
+  static startingAt (location: string): History {
+    return new History([location], false);
+  }
+
+  add (location: string): History {
+    return new History(this.entries.concat([location]), this.hasRevisitedSmallCave);
+  }
+
+  includes (location: string): boolean {
+    return this.entries.includes(location);
+  }
+}
+
+const findRoutes2 = (map: CaveSystem, currentPosition: string, history: History): ValueOrArray<string>[] => {
+  const nextSteps = map[currentPosition];
+  const routes = [...nextSteps].map((location) => {
+    // 1. End state
+    if (location === 'end') return history.add(location).entries;
+    // 2. Large caves
+    // 3. Unvisited small caves
+    if (isUpperCase(location) || !history.includes(location)) {
+      return findRoutes2(map, location, history.add(location));
+    }
+    // 4. Small caves post revisiting
+    // 5. Start cave
+    if (history.hasRevisitedSmallCave || location === 'start') return;
+
+    // 6. Revisting a small cave
+    const newHistory = history.add(location);
+    newHistory.hasRevisitedSmallCave = true;
+    return findRoutes2(map, location, newHistory);
+  });
+  return routes.filter(Boolean).flat() as ValueOrArray<string>[];
+};
+
+export function solvePart2 (input: string): number {
+  const links = parseInput(input);
+  const caveSystem = constructMap(links);
+  const allRoutes = findRoutes2(caveSystem, 'start', History.startingAt('start'));
+  return allRoutes.filter(route => route === 'end').length;
+}
