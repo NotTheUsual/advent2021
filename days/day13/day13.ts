@@ -73,9 +73,13 @@ const parseInput = (input: string): ParsedInput => {
 export function solvePart1 (input: string): number {
   const { grid, folds } = parseInput(input);
   grid.fold(folds[0]);
-  // folds.forEach(fold => {
-  //   grid.fold(fold);
-  // });
-  
   return grid.pointCount;
+}
+
+export function solvePart2 (input: string): string {
+  const { grid, folds } = parseInput(input);
+  folds.forEach(fold => {
+    grid.fold(fold);
+  });
+  return grid.toString();
 }

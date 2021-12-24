@@ -1,5 +1,5 @@
 import theredoc from 'theredoc';
-import { solvePart1 } from './day13';
+import { solvePart1, solvePart2 } from './day13';
 import day13Input from './day13.input';
 
 describe('Day 13', () => {
@@ -33,6 +33,20 @@ describe('Day 13', () => {
     test('real puzzle', () => {
       const result = solvePart1(day13Input);
       expect(result).toBe(687);
+    });
+  });
+
+  describe('part 2', () => {
+    test('real puzzle', () => {
+      const result = solvePart2(day13Input);
+      expect(result).toBe(theredoc`
+        ####..##..#..#..##..#..#.###..####..##..
+        #....#..#.#.#..#..#.#.#..#..#....#.#..#.
+        ###..#....##...#....##...###....#..#....
+        #....#.##.#.#..#....#.#..#..#..#...#.##.
+        #....#..#.#.#..#..#.#.#..#..#.#....#..#.
+        #.....###.#..#..##..#..#.###..####..###.
+      `);
     });
   });
 });
