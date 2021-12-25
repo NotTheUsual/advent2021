@@ -1,3 +1,5 @@
+import { doTimes } from "../_utils";
+
 type BaseGrid = number[][];
 
 class Grid {
@@ -55,10 +57,6 @@ const parseInput = (input: string): BaseGrid => {
         line.split('')
           .map(number => parseInt(number))
       );
-};
-
-const doTimes = (times: number, predicate: () => void): void => {
-  [...new Array(times)].forEach(predicate);
 };
 
 export function solvePart1 (input: string, times: number = 100): number {

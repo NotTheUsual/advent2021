@@ -1,6 +1,4 @@
-const doTimes = (times: number, predicate: () => void): void => {
-  [...new Array(times)].forEach(predicate);
-};
+import { doTimes } from "../_utils";
 
 export function solvePart1 (input: string): number {
   let fish = input.split(',').map(number => parseInt(number));
