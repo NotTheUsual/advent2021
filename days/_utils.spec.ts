@@ -1,4 +1,4 @@
-import { safeIncrement, doTimes } from './_utils';
+import { safeIncrement, doTimes, createCounter } from './_utils';
 
 describe('_utils', () => {
   describe('safeIncrement', () => {
@@ -20,6 +20,15 @@ describe('_utils', () => {
       let count = 0;
       doTimes(2, () => count += 1);
       expect(count).toBe(2);
+    });
+  });
+
+  describe('createCounter', () => {
+    test('creates a counter', () => {
+      const counter = createCounter();
+      counter.A += 1;
+      expect(counter.A).toBe(1);
+      expect(counter.B).toBe(0);
     });
   });
 });

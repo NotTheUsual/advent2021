@@ -7,3 +7,5 @@ export const safeIncrement = <TKey extends Keyable>(collection: Record<TKey, num
 export const doTimes = (times: number, predicate: () => void): void => {
   [...new Array(times)].forEach(predicate);
 };
+
+export const createCounter = () => new Proxy<Record<string, number>>({}, { get: (target, name: string) => name in target ? target[name] : 0 });

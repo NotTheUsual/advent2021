@@ -1,7 +1,6 @@
-const inNumericOrder = (a: number, b: number): number => a - b;
+import { createCounter } from '../_utils';
 
-type Counts = Record<string, number>;
-const createCounter = () => new Proxy<Counts>({}, { get: (target, name: string) => name in target ? target[name] : 0 })
+const inNumericOrder = (a: number, b: number): number => a - b;
 
 export function solvePart1 (input: string): number {
   const numbers = input.split(',').map(number => parseInt(number)).sort(inNumericOrder);
